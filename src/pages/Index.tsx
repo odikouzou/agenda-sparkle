@@ -55,7 +55,7 @@ const Index = () => {
         <div className="container py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">Event Agenda</h1>
+              <h1 className="text-2xl font-bold">KED</h1>
               <div className="flex items-center gap-2 mt-1 text-sm text-gray-500">
                 <Calendar className="w-4 h-4" />
                 <span>April 15, 2024</span>
