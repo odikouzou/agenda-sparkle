@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { SessionCard } from "@/components/SessionCard";
 import { SessionDialog } from "@/components/SessionDialog";
+import { FloorPlan } from "@/components/FloorPlan";
 import { mockSessions } from "@/data/mockData";
 import { Session } from "@/types/agenda";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock } from "lucide-react";
+import { Calendar, Clock, LayoutPlan } from "lucide-react";
 
 const Index = () => {
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
   const [personalSchedule, setPersonalSchedule] = useState<string[]>([]);
   const [showPersonalSchedule, setShowPersonalSchedule] = useState(false);
+  const [showFloorPlan, setShowFloorPlan] = useState(false);
 
   const handleSessionClick = (session: Session) => {
     setSelectedSession(session);
@@ -45,27 +47,40 @@ const Index = () => {
                 <span>9:00 AM - 5:00 PM</span>
               </div>
             </div>
-            <Button
-              variant="outline"
-              onClick={() => setShowPersonalSchedule(!showPersonalSchedule)}
-            >
-              {showPersonalSchedule ? "Show All Sessions" : "Show My Schedule"}
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                onClick={() => setShowPersonalSchedule(!showPersonalSchedule)}
+              >
+                {showPersonalSchedule ? "Show All Sessions" : "Show My Schedule"}
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setShowFloorPlan(!showFloorPlan)}
+              >
+                <LayoutPlan className="w-4 h-4 mr-2" />
+                {showFloorPlan ? "Show Agenda" : "Show Floor Plan"}
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
       <main className="container py-8">
-        <div className="grid gap-4">
-          {displaySessions.map((session) => (
-            <SessionCard
-              key={session.id}
-              session={session}
-              onClick={() => handleSessionClick(session)}
-              isSelected={personalSchedule.includes(session.id)}
-            />
-          ))}
-        </div>
+        {showFloorPlan ? (
+          <FloorPlan />
+        ) : (
+          <div className="grid gap-4">
+            {displaySessions.map((session) => (
+              <SessionCard
+                key={session.id}
+                session={session}
+                onClick={() => handleSessionClick(session)}
+                isSelected={personalSchedule.includes(session.id)}
+              />
+            ))}
+          </div>
+        )}
 
         {selectedSession && (
           <SessionDialog
