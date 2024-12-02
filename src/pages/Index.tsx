@@ -3,7 +3,7 @@ import { SessionCard } from "@/components/SessionCard";
 import { SessionDialog } from "@/components/SessionDialog";
 import { FloorPlan } from "@/components/FloorPlan";
 import { mockSessions } from "@/data/mockData";
-import { Session } from "@/types/agenda";
+import { Session, Category } from "@/types/agenda";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, LayoutTemplate } from "lucide-react";
 
@@ -12,6 +12,7 @@ const Index = () => {
   const [personalSchedule, setPersonalSchedule] = useState<string[]>([]);
   const [showPersonalSchedule, setShowPersonalSchedule] = useState(false);
   const [showFloorPlan, setShowFloorPlan] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<Category | "all">("all");
 
   const handleSessionClick = (session: Session) => {
     setSelectedSession(session);
@@ -29,9 +30,24 @@ const Index = () => {
     );
   };
 
-  const displaySessions = showPersonalSchedule
-    ? mockSessions.filter((session) => personalSchedule.includes(session.id))
-    : mockSessions;
+  const categories: { value: Category | "all"; label: string }[] = [
+    { value: "all", label: "All Categories" },
+    { value: "development", label: "Development" },
+    { value: "design", label: "Design" },
+    { value: "devops", label: "DevOps" },
+    { value: "business", label: "Business" },
+    { value: "general", label: "General" },
+  ];
+
+  const filteredSessions = mockSessions.filter((session) => {
+    if (showPersonalSchedule) {
+      return personalSchedule.includes(session.id);
+    }
+    if (selectedCategory === "all") {
+      return true;
+    }
+    return session.category === selectedCategory;
+  });
 
   return (
     <div className="min-h-screen bg-background">
@@ -63,6 +79,20 @@ const Index = () => {
               </Button>
             </div>
           </div>
+          {!showFloorPlan && !showPersonalSchedule && (
+            <div className="flex gap-2 mt-4 overflow-x-auto pb-2">
+              {categories.map((category) => (
+                <Button
+                  key={category.value}
+                  variant={selectedCategory === category.value ? "default" : "outline"}
+                  onClick={() => setSelectedCategory(category.value)}
+                  className="whitespace-nowrap"
+                >
+                  {category.label}
+                </Button>
+              ))}
+            </div>
+          )}
         </div>
       </header>
 
@@ -71,7 +101,7 @@ const Index = () => {
           <FloorPlan />
         ) : (
           <div className="grid gap-4">
-            {displaySessions.map((session) => (
+            {filteredSessions.map((session) => (
               <SessionCard
                 key={session.id}
                 session={session}

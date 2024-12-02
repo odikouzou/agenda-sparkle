@@ -2,6 +2,8 @@ export type Theme = "orange" | "purple" | "blue" | "peach";
 
 export type DifficultyLevel = "beginner" | "intermediate" | "advanced";
 
+export type Category = "development" | "design" | "devops" | "business" | "general";
+
 export interface Speaker {
   id: string;
   name: string;
@@ -26,6 +28,7 @@ export interface Session {
   theme: Theme;
   isPlenary: boolean;
   difficultyLevel: DifficultyLevel;
+  category: Category;
   speakers: Speaker[];
   feedback: Feedback[];
 }

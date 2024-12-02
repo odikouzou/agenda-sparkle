@@ -11,6 +11,7 @@ export const mockSessions: Session[] = [
     theme: "purple",
     isPlenary: true,
     difficultyLevel: "beginner",
+    category: "general",
     speakers: [
       {
         id: "s1",
@@ -31,6 +32,7 @@ export const mockSessions: Session[] = [
     theme: "orange",
     isPlenary: false,
     difficultyLevel: "advanced",
+    category: "development",
     speakers: [
       {
         id: "s2",
@@ -51,6 +53,7 @@ export const mockSessions: Session[] = [
     theme: "blue",
     isPlenary: false,
     difficultyLevel: "intermediate",
+    category: "design",
     speakers: [
       {
         id: "s3",
@@ -71,6 +74,7 @@ export const mockSessions: Session[] = [
     theme: "peach",
     isPlenary: false,
     difficultyLevel: "intermediate",
+    category: "development",
     speakers: [
       {
         id: "s4",
@@ -83,19 +87,20 @@ export const mockSessions: Session[] = [
   },
   {
     id: "5",
-    title: "Cloud Native Architecture",
-    description: "Deep dive into cloud native architecture patterns and practices.",
-    startTime: "2024-04-15T14:30:00",
-    endTime: "2024-04-15T15:30:00",
+    title: "DevOps Best Practices",
+    description: "Learn about CI/CD pipelines and modern DevOps practices.",
+    startTime: "2024-04-15T13:00:00",
+    endTime: "2024-04-15T14:00:00",
     room: "Room D",
     theme: "purple",
     isPlenary: false,
     difficultyLevel: "advanced",
+    category: "devops",
     speakers: [
       {
         id: "s5",
         name: "Alice Wong",
-        role: "Cloud Architect",
+        role: "DevOps Engineer",
         avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice",
       }
     ],
@@ -103,6 +108,27 @@ export const mockSessions: Session[] = [
   },
   {
     id: "6",
+    title: "Business Strategy Workshop",
+    description: "Strategic planning for tech leaders.",
+    startTime: "2024-04-15T13:00:00",
+    endTime: "2024-04-15T14:00:00",
+    room: "Room B",
+    theme: "blue",
+    isPlenary: false,
+    difficultyLevel: "intermediate",
+    category: "business",
+    speakers: [
+      {
+        id: "s6",
+        name: "James Wilson",
+        role: "VP of Engineering",
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=James",
+      }
+    ],
+    feedback: []
+  },
+  {
+    id: "7",
     title: "Closing Keynote",
     description: "Wrap up the day with insights into the future of software development.",
     startTime: "2024-04-15T16:00:00",
@@ -111,12 +137,13 @@ export const mockSessions: Session[] = [
     theme: "blue",
     isPlenary: true,
     difficultyLevel: "beginner",
+    category: "general",
     speakers: [
       {
-        id: "s6",
-        name: "James Wilson",
-        role: "VP of Engineering",
-        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=James",
+        id: "s7",
+        name: "Robert Taylor",
+        role: "CTO",
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Robert",
       }
     ],
     feedback: []

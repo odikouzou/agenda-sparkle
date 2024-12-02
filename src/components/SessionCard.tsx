@@ -17,6 +17,14 @@ export const SessionCard = ({ session, onClick, isSelected }: SessionCardProps) 
     peach: "bg-theme-peach",
   };
 
+  const categoryColors = {
+    development: "bg-blue-100 text-blue-800",
+    design: "bg-purple-100 text-purple-800",
+    devops: "bg-green-100 text-green-800",
+    business: "bg-yellow-100 text-yellow-800",
+    general: "bg-gray-100 text-gray-800",
+  };
+
   return (
     <div
       className={cn(
@@ -35,6 +43,12 @@ export const SessionCard = ({ session, onClick, isSelected }: SessionCardProps) 
             {session.isPlenary && (
               <Users className="w-4 h-4 text-primary" />
             )}
+            <span className={cn(
+              "text-xs px-2 py-0.5 rounded-full",
+              categoryColors[session.category]
+            )}>
+              {session.category.charAt(0).toUpperCase() + session.category.slice(1)}
+            </span>
           </div>
           <h3 className="font-semibold mt-1">{session.title}</h3>
           <p className="text-sm text-gray-500 mt-1">{session.room}</p>
