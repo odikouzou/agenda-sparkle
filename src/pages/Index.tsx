@@ -5,7 +5,7 @@ import { FloorPlan } from "@/components/FloorPlan";
 import { mockSessions } from "@/data/mockData";
 import { Session } from "@/types/agenda";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, LayoutPlan } from "lucide-react";
+import { Calendar, Clock, LayoutTemplate } from "lucide-react";
 
 const Index = () => {
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
@@ -58,7 +58,7 @@ const Index = () => {
                 variant="outline"
                 onClick={() => setShowFloorPlan(!showFloorPlan)}
               >
-                <LayoutPlan className="w-4 h-4 mr-2" />
+                <LayoutTemplate className="w-4 h-4 mr-2" />
                 {showFloorPlan ? "Show Agenda" : "Show Floor Plan"}
               </Button>
             </div>
