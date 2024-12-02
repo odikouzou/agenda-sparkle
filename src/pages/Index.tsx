@@ -47,7 +47,7 @@ const Index = () => {
                 <span>9:00 AM - 5:00 PM</span>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2">
               <Button
                 variant="outline"
                 onClick={() => setShowPersonalSchedule(!showPersonalSchedule)}
