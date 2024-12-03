@@ -40,6 +40,15 @@ export const SessionDialog = ({
     }
 
     // In a real app, this would be an API call
+    const newFeedback = {
+      id: Math.random().toString(),
+      rating,
+      comment,
+      timestamp: new Date().toISOString(),
+    };
+    
+    session.feedback.push(newFeedback);
+    
     toast({
       title: "Feedback submitted",
       description: "Thank you for your feedback!",
@@ -106,7 +115,7 @@ export const SessionDialog = ({
           </div>
 
           <div className="space-y-4">
-            <h4 className="font-semibold">Feedback</h4>
+            <h4 className="font-semibold">Leave Feedback</h4>
             <div className="flex gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star
@@ -125,6 +134,32 @@ export const SessionDialog = ({
             />
             <Button onClick={handleSubmitFeedback}>Submit Feedback</Button>
           </div>
+
+          {session.feedback.length > 0 && (
+            <div className="space-y-4">
+              <h4 className="font-semibold">Previous Feedback</h4>
+              <div className="space-y-4 max-h-60 overflow-y-auto">
+                {session.feedback.map((feedback) => (
+                  <div key={feedback.id} className="bg-muted p-4 rounded-lg">
+                    <div className="flex gap-1 mb-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star
+                          key={star}
+                          className={`w-4 h-4 ${
+                            star <= feedback.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <p className="text-sm text-gray-600">{feedback.comment}</p>
+                    <p className="text-xs text-gray-400 mt-2">
+                      {format(new Date(feedback.timestamp), "MMM d, yyyy HH:mm")}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="flex justify-end gap-2">
             <Button
