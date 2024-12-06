@@ -12,7 +12,7 @@ const Index = () => {
   const [personalSchedule, setPersonalSchedule] = useState<string[]>([]);
   const [showPersonalSchedule, setShowPersonalSchedule] = useState(false);
   const [showFloorPlan, setShowFloorPlan] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<Category | "all">("all");
+  const [selectedCategories, setSelectedCategories] = useState<Set<Category | "all">>(new Set(["all"]));
 
   const handleSessionClick = (session: Session) => {
     setSelectedSession(session);
@@ -30,6 +30,31 @@ const Index = () => {
     );
   };
 
+  const toggleCategory = (category: Category | "all") => {
+    setSelectedCategories((current) => {
+      const newCategories = new Set(current);
+      
+      if (category === "all") {
+        // If "all" is clicked, clear other selections and only keep "all"
+        return new Set(["all"]);
+      } else {
+        // If a specific category is clicked
+        newCategories.delete("all"); // Remove "all" when selecting specific categories
+        if (newCategories.has(category)) {
+          newCategories.delete(category);
+          // If no categories are selected, default back to "all"
+          if (newCategories.size === 0) {
+            newCategories.add("all");
+          }
+        } else {
+          newCategories.add(category);
+        }
+      }
+      
+      return newCategories;
+    });
+  };
+
   const categories: { value: Category | "all"; label: string }[] = [
     { value: "all", label: "All Categories" },
     { value: "development", label: "Development" },
@@ -43,10 +68,10 @@ const Index = () => {
     if (showPersonalSchedule) {
       return personalSchedule.includes(session.id);
     }
-    if (selectedCategory === "all") {
+    if (selectedCategories.has("all")) {
       return true;
     }
-    return session.categories.includes(selectedCategory as Category);
+    return session.categories.some(category => selectedCategories.has(category));
   });
 
   return (
@@ -84,8 +109,8 @@ const Index = () => {
               {categories.map((category) => (
                 <Button
                   key={category.value}
-                  variant={selectedCategory === category.value ? "default" : "outline"}
-                  onClick={() => setSelectedCategory(category.value)}
+                  variant={selectedCategories.has(category.value) ? "default" : "outline"}
+                  onClick={() => toggleCategory(category.value)}
                   className="whitespace-nowrap"
                 >
                   {category.label}
