@@ -64,15 +64,17 @@ const Index = () => {
     { value: "general", label: "General" },
   ];
 
-  const filteredSessions = mockSessions.filter((session) => {
-    if (showPersonalSchedule) {
-      return personalSchedule.includes(session.id);
-    }
-    if (selectedCategories.has("all")) {
-      return true;
-    }
-    return session.categories.some(category => selectedCategories.has(category));
-  });
+  const filteredSessions = mockSessions
+    .filter((session) => {
+      if (showPersonalSchedule) {
+        return personalSchedule.includes(session.id);
+      }
+      if (selectedCategories.has("all")) {
+        return true;
+      }
+      return session.categories.some(category => selectedCategories.has(category));
+    })
+    .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
 
   return (
     <div className="min-h-screen bg-background">
