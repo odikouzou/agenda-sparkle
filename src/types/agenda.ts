@@ -28,7 +28,7 @@ export interface Session {
   theme: Theme;
   isPlenary: boolean;
   difficultyLevel: DifficultyLevel;
-  category: Category;
+  categories: Category[];
   speakers: Speaker[];
   feedback: Feedback[];
 }

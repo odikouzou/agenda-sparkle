@@ -43,12 +43,19 @@ export const SessionCard = ({ session, onClick, isSelected }: SessionCardProps) 
             {session.isPlenary && (
               <Users className="w-4 h-4 text-primary" />
             )}
-            <span className={cn(
-              "text-xs px-2 py-0.5 rounded-full",
-              categoryColors[session.category]
-            )}>
-              {session.category.charAt(0).toUpperCase() + session.category.slice(1)}
-            </span>
+          </div>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {session.categories.map((category) => (
+              <span
+                key={category}
+                className={cn(
+                  "text-xs px-2 py-0.5 rounded-full",
+                  categoryColors[category]
+                )}
+              >
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </span>
+            ))}
           </div>
           <h3 className="font-semibold mt-1">{session.title}</h3>
           <p className="text-sm text-gray-500 mt-1">{session.room}</p>

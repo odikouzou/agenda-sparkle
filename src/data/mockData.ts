@@ -11,7 +11,7 @@ export const mockSessions: Session[] = [
     theme: "purple",
     isPlenary: true,
     difficultyLevel: "beginner",
-    category: "general",
+    categories: ["general", "business"],
     speakers: [
       {
         id: "s1",
@@ -32,7 +32,7 @@ export const mockSessions: Session[] = [
     theme: "orange",
     isPlenary: false,
     difficultyLevel: "advanced",
-    category: "development",
+    categories: ["development", "devops"],
     speakers: [
       {
         id: "s2",
@@ -53,7 +53,7 @@ export const mockSessions: Session[] = [
     theme: "blue",
     isPlenary: false,
     difficultyLevel: "intermediate",
-    category: "design",
+    categories: ["design", "development"],
     speakers: [
       {
         id: "s3",
@@ -74,7 +74,7 @@ export const mockSessions: Session[] = [
     theme: "peach",
     isPlenary: false,
     difficultyLevel: "intermediate",
-    category: "development",
+    categories: ["development", "business"],
     speakers: [
       {
         id: "s4",
@@ -95,7 +95,7 @@ export const mockSessions: Session[] = [
     theme: "purple",
     isPlenary: false,
     difficultyLevel: "advanced",
-    category: "devops",
+    categories: ["devops"],
     speakers: [
       {
         id: "s5",
@@ -116,7 +116,7 @@ export const mockSessions: Session[] = [
     theme: "blue",
     isPlenary: false,
     difficultyLevel: "intermediate",
-    category: "business",
+    categories: ["business"],
     speakers: [
       {
         id: "s6",
@@ -137,7 +137,7 @@ export const mockSessions: Session[] = [
     theme: "blue",
     isPlenary: true,
     difficultyLevel: "beginner",
-    category: "general",
+    categories: ["general", "development", "business"],
     speakers: [
       {
         id: "s7",

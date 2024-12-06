@@ -46,7 +46,7 @@ const Index = () => {
     if (selectedCategory === "all") {
       return true;
     }
-    return session.category === selectedCategory;
+    return session.categories.includes(selectedCategory as Category);
   });
 
   return (
