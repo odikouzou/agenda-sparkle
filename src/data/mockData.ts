@@ -2,6 +2,33 @@ import { Session } from "../types/agenda";
 
 export const mockSessions: Session[] = [
   {
+    id: "0",
+    title: "Conference Workshop: Building Modern Web Applications",
+    description: "An intensive workshop covering modern web development practices, from architecture to deployment.",
+    startTime: "2024-04-15T09:00:00",
+    endTime: "2024-04-15T11:00:00",
+    room: "Workshop Room",
+    theme: "blue",
+    isPlenary: false,
+    difficultyLevel: "intermediate",
+    categories: ["development", "devops"],
+    speakers: [
+      {
+        id: "s0",
+        name: "Jennifer Smith",
+        role: "Principal Software Architect",
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jennifer",
+      },
+      {
+        id: "s0b",
+        name: "Mark Wilson",
+        role: "Senior Developer",
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mark",
+      }
+    ],
+    feedback: []
+  },
+  {
     id: "1",
     title: "Opening Keynote",
     description: "Join us for an inspiring opening keynote about the future of technology.",
