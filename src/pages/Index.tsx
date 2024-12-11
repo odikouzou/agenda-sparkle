@@ -6,6 +6,7 @@ import { mockSessions } from "@/data/mockData";
 import { Session, Category } from "@/types/agenda";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, LayoutTemplate } from "lucide-react";
+import { format, startOfHour, isSameHour } from "date-fns";
 
 const Index = () => {
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
@@ -76,6 +77,16 @@ const Index = () => {
     })
     .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
 
+  // Group sessions by hour
+  const sessionsByHour = filteredSessions.reduce((acc, session) => {
+    const hourKey = startOfHour(new Date(session.startTime)).toISOString();
+    if (!acc[hourKey]) {
+      acc[hourKey] = [];
+    }
+    acc[hourKey].push(session);
+    return acc;
+  }, {} as Record<string, Session[]>);
+
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b">
@@ -127,14 +138,23 @@ const Index = () => {
         {showFloorPlan ? (
           <FloorPlan />
         ) : (
-          <div className="grid gap-4">
-            {filteredSessions.map((session) => (
-              <SessionCard
-                key={session.id}
-                session={session}
-                onClick={() => handleSessionClick(session)}
-                isSelected={personalSchedule.includes(session.id)}
-              />
+          <div className="space-y-8">
+            {Object.entries(sessionsByHour).map(([hourKey, sessions]) => (
+              <div key={hourKey} className="space-y-4">
+                <h2 className="text-lg font-semibold">
+                  {format(new Date(hourKey), "HH:mm")}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {sessions.map((session) => (
+                    <SessionCard
+                      key={session.id}
+                      session={session}
+                      onClick={() => handleSessionClick(session)}
+                      isSelected={personalSchedule.includes(session.id)}
+                    />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         )}
